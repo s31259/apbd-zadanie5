@@ -126,6 +126,8 @@ public class DbService : IDbService
                 }
             });
         }
+        
+        var sortedPrescriptionsDto = prescriptionsDto.OrderByDescending(p => p.DueDate).ToList();
 
         var patientDto = new GetPatientInfoDto
         {
@@ -133,7 +135,7 @@ public class DbService : IDbService
             FirstName = patient.FirstName,
             LastName = patient.LastName,
             BirthDate = patient.BirthDate,
-            Prescriptions = prescriptionsDto
+            Prescriptions = sortedPrescriptionsDto
         };
         
         return patientDto;
