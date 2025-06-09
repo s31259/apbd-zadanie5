@@ -8,17 +8,14 @@ namespace Zadanie5.Models;
 [Table("Prescription_Medicament")]
 public class PrescriptionMedicament
 {
-    [Required]
     [ForeignKey(nameof(Medicament))]
     public int IdMedicament { get; set; }
     
-    [Required]
     [ForeignKey(nameof(Prescription))]
     public int IdPrecription { get; set; }
     
     public int? Dose { get; set; }
     
-    [Required]
     [MaxLength(100)]
     public string Details { get; set; }
     

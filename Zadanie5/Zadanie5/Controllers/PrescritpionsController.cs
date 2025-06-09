@@ -31,11 +31,11 @@ public class PrescritpionsController : ControllerBase
     }
     
     [HttpPost("prescriptions")]
-    public async Task<IActionResult> AddPrescriptionAsync(AddPrescriptionDto request)
+    public async Task<IActionResult> AddPrescriptionAsync(AddPrescriptionDto requestDto)
     {
         try
         {
-            await _dbService.AddPrescriptionAsync(request);
+            await _dbService.AddPrescriptionAsync(requestDto);
             return Created();
         }
         catch (BadRequestException bre)

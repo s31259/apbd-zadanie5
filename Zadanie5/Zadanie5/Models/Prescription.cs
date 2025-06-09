@@ -8,21 +8,16 @@ namespace Zadanie5.Models;
 [Table("Prescription")]
 public class Prescription
 {   
-    [Required]
     [Key]
     public int IdPrescription { get; set; }   
 
-    [Required]
     public DateTime Date { get; set; }
     
-    [Required]
     public DateTime DueDate { get; set; }
     
-    [Required]
     [ForeignKey(nameof(Patient))]
     public int IdPatient { get; set; }
     
-    [Required]
     [ForeignKey(nameof(Doctor))]
     public int IdDoctor { get; set; }
     

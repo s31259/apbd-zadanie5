@@ -88,41 +88,38 @@ public class DbService : IDbService
     public async Task<PatientInfoDto> GetPatientAsyns(int patientId)
     {
         
-        var patient = await _dbContext.Patients.FirstOrDefaultAsync(p => p.IdPatient == patientId);
+        var patientInfoDto = await _dbContext.Patients.Select(p => new PatientInfoDto
+        {
+            IdPatient = p.IdPatient,
+            FirstName = p.FirstName,
+            LastName = p.LastName,
+            BirthDate = p.BirthDate,
+            Prescriptions = p.Prescriptions.Select(pre => new PrescriptionDto
+            {
+                IdPrescription = pre.IdPrescription,
+                Date = pre.Date,
+                DueDate = pre.DueDate,
+                Medicaments = pre.PrescriptionsMedicaments.Select(preM => new PrescriptionMedicamentDto
+                {
+                    IdMedicament = preM.Medicament.IdMedicament,
+                    Name = preM.Medicament.Name,
+                    Dose = preM.Dose,
+                    Description = preM.Details
+                }).ToList(),
+                Doctor = new DoctorDto()
+                {
+                    IdDoctor = pre.Doctor.IdDoctor,
+                    FirstName = pre.Doctor.FirstName,
+                    LastName = pre.Doctor.LastName,
+                    Email = pre.Doctor.Email
+                }
+            }).ToList()
+        }).FirstOrDefaultAsync(p => p.IdPatient == patientId);
 
-        if (patient is null)
+        if (patientInfoDto is null)
         {
             throw new NotFoundException($"Patient with given ID - {patientId} doesn't exist");
         }
-
-        var patientInfoDto = new PatientInfoDto
-        {
-            IdPatient = patient.IdPatient,
-            FirstName = patient.FirstName,
-            LastName = patient.LastName,
-            BirthDate = patient.BirthDate,
-            Prescriptions = await _dbContext.Prescriptions.Where(p => p.IdPatient == patientId).Select(p =>
-                new PrescriptionDto
-                {
-                    IdPrescription = p.IdPrescription,
-                    Date = p.Date,
-                    DueDate = p.DueDate,
-                    Medicaments = p.PrescriptionsMedicaments.Select(pm => new PrescriptionMedicamentDto
-                    {
-                        IdMedicament = pm.IdMedicament,
-                        Name = pm.Medicament.Name,
-                        Dose = pm.Dose,
-                        Description = pm.Details
-                    }).ToList(),
-                    Doctor = new DoctorDto
-                    {
-                        IdDoctor = p.Doctor.IdDoctor,
-                        FirstName = p.Doctor.FirstName,
-                        LastName = p.Doctor.LastName,
-                        Email = p.Doctor.Email
-                    }
-                }).OrderByDescending(p => p.DueDate).ToListAsync()
-        };
         
         return patientInfoDto;
     }
