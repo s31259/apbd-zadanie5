@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace Zadanie5.Migrations
 {
     /// <inheritdoc />
-    public partial class AddedDatabaseAndSeedings : Migration
+    public partial class Init : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -51,7 +51,7 @@ namespace Zadanie5.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     FirstName = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
                     LastName = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
-                    BirthDate = table.Column<DateTime>(type: "datetime2", maxLength: 100, nullable: false)
+                    BirthDate = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -122,9 +122,9 @@ namespace Zadanie5.Migrations
                 columns: new[] { "IdMedicament", "Description", "Name", "Type" },
                 values: new object[,]
                 {
-                    { 1, "TestDescription1", "TestMedicament1", "TestType1" },
-                    { 2, "TestDescription2", "TestMedicament2", "TestType2" },
-                    { 3, "TestDescription3", "TestMedicament3", "TestType3" }
+                    { 1, "", "TestMedicament1", "" },
+                    { 2, "", "TestMedicament2", "" },
+                    { 3, "", "TestMedicament3", "" }
                 });
 
             migrationBuilder.InsertData(

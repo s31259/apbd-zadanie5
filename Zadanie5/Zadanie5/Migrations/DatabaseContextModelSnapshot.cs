@@ -47,7 +47,7 @@ namespace Zadanie5.Migrations
 
                     b.HasKey("IdDoctor");
 
-                    b.ToTable("Doctor", (string)null);
+                    b.ToTable("Doctor");
 
                     b.HasData(
                         new
@@ -84,29 +84,29 @@ namespace Zadanie5.Migrations
 
                     b.HasKey("IdMedicament");
 
-                    b.ToTable("Medicament", (string)null);
+                    b.ToTable("Medicament");
 
                     b.HasData(
                         new
                         {
                             IdMedicament = 1,
-                            Description = "TestDescription1",
+                            Description = "",
                             Name = "TestMedicament1",
-                            Type = "TestType1"
+                            Type = ""
                         },
                         new
                         {
                             IdMedicament = 2,
-                            Description = "TestDescription2",
+                            Description = "",
                             Name = "TestMedicament2",
-                            Type = "TestType2"
+                            Type = ""
                         },
                         new
                         {
                             IdMedicament = 3,
-                            Description = "TestDescription3",
+                            Description = "",
                             Name = "TestMedicament3",
-                            Type = "TestType3"
+                            Type = ""
                         });
                 });
 
@@ -119,7 +119,6 @@ namespace Zadanie5.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("IdPatient"));
 
                     b.Property<DateTime>("BirthDate")
-                        .HasMaxLength(100)
                         .HasColumnType("datetime2");
 
                     b.Property<string>("FirstName")
@@ -134,7 +133,7 @@ namespace Zadanie5.Migrations
 
                     b.HasKey("IdPatient");
 
-                    b.ToTable("Patient", (string)null);
+                    b.ToTable("Patient");
 
                     b.HasData(
                         new

@@ -22,53 +22,21 @@ public class DatabaseContext: DbContext
     
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        modelBuilder.Entity<Doctor>(d =>
-        {
-            d.ToTable("Doctor");
-            
-            d.HasKey(e => e.IdDoctor);
-            d.Property(e => e.FirstName).HasMaxLength(100);
-            d.Property(e => e.LastName).HasMaxLength(100);
-            d.Property(e => e.Email).HasMaxLength(100);
-        });
-        
         modelBuilder.Entity<Doctor>().HasData(new List<Doctor>
         {
             new Doctor() { IdDoctor = 1, FirstName = "John", LastName = "Meyer", Email = "john.meyer@gmail.com" }
         });
         
-        modelBuilder.Entity<Patient>(p =>
-        {
-            p.ToTable("Patient");
-            
-            p.HasKey(e => e.IdPatient);
-            p.Property(e => e.FirstName).HasMaxLength(100);
-            p.Property(e => e.LastName).HasMaxLength(100);
-            p.Property(e => e.BirthDate).HasMaxLength(100);
-        });
-        
         modelBuilder.Entity<Patient>().HasData(new List<Patient>
         {
-            new Patient() { IdPatient = 1, FirstName = "Raiden", LastName = "Gaines", BirthDate = DateTime.Parse("01/01/1990") }
-        });
-        
-        modelBuilder.Entity<Medicament>(p =>
-        {
-            p.ToTable("Medicament");
-            
-            p.HasKey(e => e.IdMedicament);
-            p.Property(e => e.Name).HasMaxLength(100);
-            p.Property(e => e.Description).HasMaxLength(100);
-            p.Property(e => e.Type).HasMaxLength(100);
+            new Patient() { IdPatient = 1, FirstName = "Raiden", LastName = "Gaines", BirthDate = DateTime.Parse("1990-01-01") }
         });
         
         modelBuilder.Entity<Medicament>().HasData(new List<Medicament>
         {
-            new Medicament() { IdMedicament = 1, Name = "TestMedicament1", Description = "TestDescription1", Type = "TestType1"},
-            new Medicament() { IdMedicament = 2, Name = "TestMedicament2", Description = "TestDescription2", Type = "TestType2"},
-            new Medicament() { IdMedicament = 3, Name = "TestMedicament3", Description = "TestDescription3", Type = "TestType3"},
+            new Medicament() { IdMedicament = 1, Name = "TestMedicament1", Description = "", Type = ""},
+            new Medicament() { IdMedicament = 2, Name = "TestMedicament2", Description = "", Type = ""},
+            new Medicament() { IdMedicament = 3, Name = "TestMedicament3", Description = "", Type = ""},
         });
-
-
     }
 }

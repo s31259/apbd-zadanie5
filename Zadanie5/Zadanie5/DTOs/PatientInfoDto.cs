@@ -1,6 +1,6 @@
 ﻿namespace Zadanie5.DTOs;
 
-public class GetPatientInfoDto
+public class PatientInfoDto
 {
     public int IdPatient { get; set; }
     public string FirstName { get; set; }
